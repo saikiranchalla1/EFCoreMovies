@@ -14,11 +14,14 @@ namespace EFCoreMovies
             base.OnModelCreating(modelBuilder);
             //  modelBuilder.Entity<Genre>(g => g.Identifier); <- Adding a primary key using overidden methods
 
+
             modelBuilder.Entity<Genre>().Property(p => p.Name).HasMaxLength(150).IsRequired();
 
             modelBuilder.Entity<Actor>().Property(p => p.Name).HasMaxLength(150).IsRequired();
 
             modelBuilder.Entity<Cinema>().Property(p => p.Name).HasMaxLength(150).IsRequired();
+
+            modelBuilder.HasPostgresExtension("postgis"); // ensure that postgis extension is installed on the server
         }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Actor> Actors { get; set; }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NetTopologySuite.Geometries;
 
 namespace EFCoreMovies.Entities
 {
@@ -12,7 +13,6 @@ namespace EFCoreMovies.Entities
         public decimal Price { get; set; } // add-migration after this and notice the warning
 
 
-
-
+        public Point Location { get; set; }
     }
 }

@@ -11,7 +11,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("WebApiDatabase")));
+
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql("name=WebApiDatabase", x => x.UseNetTopologySuite()));
 
 var app = builder.Build();
 
