@@ -34,6 +34,8 @@ namespace EFCoreMovies
             modelBuilder.Entity<CinemaOffer>().Property(p => p.End).HasColumnType("date");
 
             modelBuilder.Entity<CinemaHall>().Property(p => p.Cost).HasPrecision(5, 2);
+
+            modelBuilder.Entity<CinemaHall>().Property(p => p.CinemaHallType).HasDefaultValue(CinemaHallType.TwoDimensions);
         }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Actor> Actors { get; set; }
