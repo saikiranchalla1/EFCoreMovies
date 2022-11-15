@@ -18,5 +18,7 @@ namespace EFCoreMovies.Entities
 
         [Column("GenreName")]
         public string Name { get; set; }
+
+        public HashSet<Movie> Movies { get; set; }
     }
 }
