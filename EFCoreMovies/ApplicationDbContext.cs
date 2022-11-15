@@ -36,6 +36,10 @@ namespace EFCoreMovies
             modelBuilder.Entity<CinemaHall>().Property(p => p.Cost).HasPrecision(5, 2);
 
             modelBuilder.Entity<CinemaHall>().Property(p => p.CinemaHallType).HasDefaultValue(CinemaHallType.TwoDimensions);
+
+            modelBuilder.Entity<MovieActor>().HasKey(p => new { p.MovieId, p.ActorId });
+
+            modelBuilder.Entity<MovieActor>().Property(p => p.Character).HasMaxLength(150);.
         }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Actor> Actors { get; set; }
@@ -47,6 +51,8 @@ namespace EFCoreMovies
         public DbSet<Movie> Movies { get; set; }
 
         public DbSet<CinemaHall> CinemaHalls { get; set; }
+
+        public DbSet<MovieActor> MoviesActors { get; set; }
         
     }
 

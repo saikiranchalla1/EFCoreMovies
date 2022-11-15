@@ -10,5 +10,7 @@
         public string PosterURL { get; set; }
 
         public HashSet<Genre> Genres { get; set; }
+
+        public HashSet<MovieActor> MoviesActors { get; set; }
     }
 }
