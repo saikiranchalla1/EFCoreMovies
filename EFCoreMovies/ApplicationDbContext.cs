@@ -22,11 +22,20 @@ namespace EFCoreMovies
             modelBuilder.Entity<Cinema>().Property(p => p.Name).HasMaxLength(150).IsRequired();
 
             modelBuilder.HasPostgresExtension("postgis"); // ensure that postgis extension is installed on the server
+
+            modelBuilder.Entity<Movie>().Property(p => p.Title).HasMaxLength(150).IsRequired();
+
+            modelBuilder.Entity<Movie>().Property(p => p.PosterURL).HasMaxLength(150).IsUnicode(false); // IsUnicode allows us to define the characters that we want to accept.
+            // Add migration afater the above step and checkout the type of PosterURL. It should be varchar
         }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Actor> Actors { get; set; }
 
         public DbSet<Cinema> Cinemas { get; set; }
+
+        // add-migration before adding the following code and check that the Movie table is already created without specifying the DbSet
+
+        public DbSet<Movie> Movies { get; set; }
         
     }
 
