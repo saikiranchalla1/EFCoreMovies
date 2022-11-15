@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EFCoreMovies.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace EFCoreMovies
 {
@@ -7,6 +8,8 @@ namespace EFCoreMovies
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
         }
+
+        public DbSet<Genre> Genres { get; set; }
     }
 
 }
