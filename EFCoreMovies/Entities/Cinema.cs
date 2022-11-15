@@ -14,5 +14,7 @@ namespace EFCoreMovies.Entities
 
 
         public Point Location { get; set; }
+
+        public CinemaOffer CinemaOffer { get; set; } // this is called a Navigation Property
     }
 }

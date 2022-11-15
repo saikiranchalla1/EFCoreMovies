@@ -27,6 +27,11 @@ namespace EFCoreMovies
 
             modelBuilder.Entity<Movie>().Property(p => p.PosterURL).HasMaxLength(150).IsUnicode(false); // IsUnicode allows us to define the characters that we want to accept.
             // Add migration afater the above step and checkout the type of PosterURL. It should be varchar
+
+
+            modelBuilder.Entity<CinemaOffer>().Property(p => p.DiscountPercentage).HasPrecision(5, 2);
+            modelBuilder.Entity<CinemaOffer>().Property(p => p.Begin).HasColumnType("date");
+            modelBuilder.Entity<CinemaOffer>().Property(p => p.End).HasColumnType("date");
         }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Actor> Actors { get; set; }
