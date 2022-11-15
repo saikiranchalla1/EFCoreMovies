@@ -12,7 +12,9 @@ namespace EFCoreMovies
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-           //  modelBuilder.Entity<Genre>(g => g.Identifier); <- Adding a primary key using overidden methods
+            //  modelBuilder.Entity<Genre>(g => g.Identifier); <- Adding a primary key using overidden methods
+
+            modelBuilder.Entity<Genre>().Property(p => p.Name).HasMaxLength(150);
         }
         public DbSet<Genre> Genres { get; set; }
     }

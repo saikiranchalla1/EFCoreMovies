@@ -9,6 +9,8 @@ namespace EFCoreMovies.Entities
 
         // [Key]
         // public int Identifier { get; set; } // throws an error of keyless entity
+        
+        // [StringLength(150)] <- or do a similar thing in the ApplicationDbContext
         public string Name { get; set; }
     }
 }
