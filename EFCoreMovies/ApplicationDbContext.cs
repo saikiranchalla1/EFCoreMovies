@@ -9,6 +9,14 @@ namespace EFCoreMovies
         {
         }
 
+
+        protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+        {
+            configurationBuilder.Properties<DateTime>().HaveColumnType("date");
+
+            configurationBuilder.Properties<string>().HaveMaxLength(150);
+            //base.ConfigureConventions(configurationBuilder);
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -39,7 +47,9 @@ namespace EFCoreMovies
 
             modelBuilder.Entity<MovieActor>().HasKey(p => new { p.MovieId, p.ActorId });
 
-            modelBuilder.Entity<MovieActor>().Property(p => p.Character).HasMaxLength(150);.
+            modelBuilder.Entity<MovieActor>().Property(p => p.Character).HasMaxLength(150);
+
+            modelBuilder.Entity<Actor>().Property(p => p.Biography).HasColumnType("nvarchar(max)");
         }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Actor> Actors { get; set; }
