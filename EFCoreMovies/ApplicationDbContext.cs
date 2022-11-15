@@ -32,6 +32,8 @@ namespace EFCoreMovies
             modelBuilder.Entity<CinemaOffer>().Property(p => p.DiscountPercentage).HasPrecision(5, 2);
             modelBuilder.Entity<CinemaOffer>().Property(p => p.Begin).HasColumnType("date");
             modelBuilder.Entity<CinemaOffer>().Property(p => p.End).HasColumnType("date");
+
+            modelBuilder.Entity<CinemaHall>().Property(p => p.Cost).HasPrecision(5, 2);
         }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Actor> Actors { get; set; }
@@ -41,6 +43,8 @@ namespace EFCoreMovies
         // add-migration before adding the following code and check that the Movie table is already created without specifying the DbSet
 
         public DbSet<Movie> Movies { get; set; }
+
+        public DbSet<CinemaHall> CinemaHalls { get; set; }
         
     }
 
