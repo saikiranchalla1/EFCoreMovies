@@ -19,7 +19,9 @@ namespace EFCoreMovies.Controllers
         public async Task<IEnumerable<Genre>> Get()
         {
             // return context.Genres.ToList(); // <- This is Synchronous
-            return await context.Genres.ToListAsync(); // this will be Asynchronous
+            return await context.Genres.AsNoTracking().ToListAsync(); // this will be Asynchronous
+            // using AsNoTracking improves the performance of the application
+            // use AsTracking to allow for tracking
         }
     }
 }
