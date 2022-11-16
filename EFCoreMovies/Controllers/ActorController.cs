@@ -1,4 +1,5 @@
-﻿using EFCoreMovies.Entities;
+﻿using EFCoreMovies.DTOs;
+using EFCoreMovies.Entities;
 using EFCoreMovies.Utilities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,5 +27,34 @@ namespace EFCoreMovies.Controllers
                 .ToListAsync();
         }
 
+
+        [HttpGet]
+        public async Task<IEnumerable<Actor>> GetProjection(int page = 1, int recordsToTake = 2)
+        {
+            return await context.Actors.AsNoTracking()
+                .OrderBy(g => g.Name)
+                .Select(a => new Actor { Id = a.Id, Name = a.Name, DateOfBirth = a.DateOfBirth})
+                .Paginate(page, recordsToTake)
+                .ToListAsync();
+            // this will set biography to null, which can be avoided using DTOs shows in next method
+        }
+
+        [HttpGet]
+        public async Task<IEnumerable<ActorDTO>> GetProjectionUsingDTO(int page = 1, int recordsToTake = 2)
+        {
+            return await context.Actors.AsNoTracking()
+                .OrderBy(g => g.Name)
+                .Select(a => new ActorDTO { Id = a.Id, Name = a.Name, DateOfBirth = a.DateOfBirth })
+                .Paginate(page, recordsToTake)
+                .ToListAsync();
+        }
+
+
+        // Project to retrieve only IDs of the actors
+        [HttpGet("ids")]
+        public async Task<IEnumerable<int>> GetIds()
+        {
+            return await context.Actors.Select(a => a.Id).ToListAsync();
+        }
     }
 }
