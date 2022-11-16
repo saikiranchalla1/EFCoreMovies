@@ -1,4 +1,5 @@
 ﻿using EFCoreMovies.Entities;
+using EFCoreMovies.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,7 +7,7 @@ namespace EFCoreMovies.Controllers
 {
     [ApiController]
     [Route("/api.genres")]
-    public class GenresController : Controller
+    public class GenresController : ControllerBase
     {
         private readonly ApplicationDbContext context;
 
@@ -49,6 +50,23 @@ namespace EFCoreMovies.Controllers
         public async Task<IEnumerable<Genre>> Filter(string name)
         {
             return await context.Genres.Where(g => g.Name.Contains(name)).ToListAsync();
+        }
+
+        [HttpGet("pagination")]
+        public async Task<IEnumerable<Genre>> GetPagination(int page = 1, int records = 2)
+        {
+            // return await context.Genres.AsNoTracking().OrderBy(g => g.Name).Skip(1).Take(2).ToListAsync();
+
+            /*return await context.Genres.AsNoTracking()
+                .OrderBy(g => g.Name)
+                .Skip((page - 1) * records)
+                .Take(records)
+                .ToListAsync();*/
+
+            return await context.Genres.AsNoTracking()
+                .OrderBy(g => g.Name)
+                .Paginate(page, records) // <- defined in an external file under utilities
+                .ToListAsync();
         }
     }
 }
