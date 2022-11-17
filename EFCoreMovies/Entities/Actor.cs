@@ -11,6 +11,6 @@ namespace EFCoreMovies.Entities
         [Column(TypeName = "Date")]
         public DateTime? DateOfBirth { get; set; }
 
-        public HashSet<MovieActor> MoviesActors { get; set; }
+        public virtual HashSet<MovieActor> MoviesActors { get; set; }
     }
 }

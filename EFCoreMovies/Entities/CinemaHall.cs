@@ -8,8 +8,8 @@ namespace EFCoreMovies.Entities
         public decimal Cost { get; set; }
         public int CinemaId { get; set; }
         public Cinema Cinema { get; set; }
-        public CinemaHallType CinemaHallType { get; set; }
+        public virtual CinemaHallType CinemaHallType { get; set; }
 
-        public HashSet<Movie> Movies { get; set; }
+        public virtual HashSet<Movie> Movies { get; set; }
     }
 }

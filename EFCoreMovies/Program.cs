@@ -20,7 +20,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking); // <= equivalent to setting AsNoTracking globally
     options.UseNpgsql("name=WebApiDatabase", x => x.UseNetTopologySuite());
-
+    options.UseLazyLoadingProxies();
 });
 
 builder.Services.AddAutoMapper(typeof(Program));

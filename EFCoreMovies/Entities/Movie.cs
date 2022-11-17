@@ -9,9 +9,9 @@
 
         public string PosterURL { get; set; }
 
-        public HashSet<Genre> Genres { get; set; }
+        public virtual HashSet<Genre> Genres { get; set; }
 
-        public HashSet<CinemaHall> CinemaHalls { get; set; }
-        public HashSet<MovieActor> MoviesActors { get; set; }
+        public virtual HashSet<CinemaHall> CinemaHalls { get; set; }
+        public virtual HashSet<MovieActor> MoviesActors { get; set; }
     }
 }

@@ -15,8 +15,8 @@ namespace EFCoreMovies.Entities
 
         public Point Location { get; set; }
 
-        public CinemaOffer CinemaOffer { get; set; } // this is called a Navigation Property
+        public virtual CinemaOffer CinemaOffer { get; set; } // this is called a Navigation Property
 
-        public List<CinemaHall> CinemaHalls { get; set; }
+        public virtual List<CinemaHall> CinemaHalls { get; set; }
     }
 }
