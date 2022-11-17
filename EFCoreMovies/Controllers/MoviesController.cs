@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using EFCoreMovies.DTOs;
 using EFCoreMovies.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -57,6 +58,8 @@ namespace EFCoreMovies.Controllers
 
             movieDTO.Cinemas = movieDTO.Cinemas.DistinctBy(x => x.Id).ToList(); // <= removies duplicate cinemas
 
+
+
             return movieDTO;
         }
 
@@ -77,6 +80,24 @@ namespace EFCoreMovies.Controllers
             }
 
             var movieDTO = mapper.Map<MovieDTO>(movie);
+
+            movieDTO.Cinemas = movieDTO.Cinemas.DistinctBy(x => x.Id).ToList();
+
+            return movieDTO;
+        }
+
+        [HttpGet("automapper/{id:int}")]
+        public async Task<ActionResult<MovieDTO>> GetWithAutoMapper(int id) // try the request by commenting Genres in MoviesDTO
+        {
+            var movieDTO = await context.Movies
+               .ProjectTo<MovieDTO>(mapper.ConfigurationProvider)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (movieDTO is null)
+            {
+                return NotFound();
+            }
+
 
             movieDTO.Cinemas = movieDTO.Cinemas.DistinctBy(x => x.Id).ToList();
 
