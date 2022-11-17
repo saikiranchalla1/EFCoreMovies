@@ -122,5 +122,30 @@ namespace EFCoreMovies.Controllers
             return Ok(movieDTO);
         }
 
+        [HttpGet("explicitLoading/{id:int}")]
+        public async Task<ActionResult<MovieDTO>> GetExplicit(int id)
+        {
+            var movie = await context.Movies.FirstOrDefaultAsync(m => m.Id == id);
+
+            if (movie is null)
+            {
+                return NotFound();
+            }
+
+            await context.Entry(movie).Collection(p => p.Genres).LoadAsync();
+            
+            // var genresCount = await context.Entry(movie).Collection(p => p.Genres).Query().CountAsync(); // <= We're not limited to loading the data. We can also use this for queries such as Counts
+
+            var movieDTO = mapper.Map<MovieDTO>(movie);
+
+            return Ok(new
+            {
+                Id = movieDTO.Id,
+                Title = movieDTO.Title,
+                // GenresCount = genresCount
+            });
+        }
+
+
     }
 }
