@@ -104,6 +104,23 @@ namespace EFCoreMovies.Controllers
             return movieDTO;
         }
 
+        [HttpGet("selectloading/{id:int}")]
+        public async Task<ActionResult> GetSelectLoading(int id)
+        {
+            var movieDTO = await context.Movies.Select(m => new
+            {
+                Id = m.Id,
+                Title = m.Title,
+                Genres = m.Genres.Select(g => g.Name).OrderByDescending(n => n).ToList()
+            }).FirstOrDefaultAsync(m => m.Id == id);
+
+            if (movieDTO is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(movieDTO);
+        }
 
     }
 }
